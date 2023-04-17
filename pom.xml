@@ -8,7 +8,8 @@
     <artifactId>compositespecification</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>CompositeSpecification</name>
-    <description>A package to use nary tree node structure.</description>
+    <url>https://jean-aymeric.github.io/composite-specification-java</url>
+    <description>A package to use the composite specification DP.</description>
 
 
     <dependencies>
@@ -39,10 +40,6 @@
                     <version>3.1.0</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
@@ -71,6 +68,51 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
+
+                <plugin>
+                    <!-- Deploy the website -->
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <version>0.9</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>site</goal>
+                            </goals>
+                            <!-- select the Maven phase in which the plugin will be executed -->
+                            <phase>site-deploy</phase>
+                            <configuration>
+                                <!-- Plugin configuration ges here -->
+
+                                <server>github</server>
+
+                                <!-- The commit message -->
+                                <message>Building site for my project</message>
+                                <!-- The location where the site is uploaded -->
+                                <path>https://github.com/Jean-Aymeric/CompositeSpecification</path>
+                                <!-- Use merge or override the content -->
+                                <merge>true</merge>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>4.0.0-M6</version>
+                    <dependencies>
+                        <dependency><!-- add support for ssh/scp -->
+                            <groupId>org.apache.maven.wagon</groupId>
+                            <artifactId>wagon-ssh</artifactId>
+                            <version>1.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -81,16 +123,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <distributionManagement>
         <site>
             <id>github</id>
-            <name>GitHub Pages</name>
-            <url>https://Jean-Aymeric.github.io/composite-specification-java</url>
+            <url>https://github.com/Jean-Aymeric/CompositeSpecification</url>
         </site>
         <repository>
             <id>github</id>
             <name>GitHub Jean-Aymeric Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Jean-Aymeric/maven-repository</url>
+            <url>https://maven.pkg.github.com/jean-aymeric/maven-repository</url>
         </repository>
     </distributionManagement>
 </project>

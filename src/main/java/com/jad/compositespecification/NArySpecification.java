@@ -11,39 +11,64 @@ import java.util.stream.Collectors;
  */
 public abstract class NArySpecification<E> extends CompositeSpecification<E> {
 
-	private final ArrayList<Specification<E>> specifications = new ArrayList<>();
+    private final ArrayList<Specification<E>> specifications = new ArrayList<>();
 
-	/**
-	 * Instantiates a new N ary specification.
-	 *
-	 * @param specifications the specifications
-	 */
-	@SafeVarargs
-	public NArySpecification(final String description, final Specification<E>... specifications) {
-		super(description);
-		this.specifications.addAll(Arrays.asList(specifications));
-	}
+    /**
+     * Instantiates a new N ary specification.
+     *
+     * @param description    the description
+     * @param specifications the specifications
+     */
+    @SafeVarargs
+    public NArySpecification(final String description, final Specification<E>... specifications) {
+        super(description);
+        this.specifications.addAll(Arrays.asList(specifications));
+    }
 
-	/**
-	 * Add.
-	 *
-	 * @param specification the specification
-	 */
-	public final void add(Specification<E> specification) {
-		this.specifications.add(specification);
-	}
+    protected NArySpecification(final String description, final ArrayList<Specification<E>> specifications) {
+        super(description);
+        this.specifications.addAll(specifications);
+    }
 
-	/**
-	 * Gets specifications.
-	 *
-	 * @return the specifications
-	 */
-	public final ArrayList<Specification<E>> getSpecifications() {
-		return specifications;
-	}
+    /**
+     * Instantiates a new N ary specification.
+     *
+     * @param specifications the specifications
+     */
+    @SafeVarargs
+    public NArySpecification(final Specification<E>... specifications) {
+        super();
+        this.specifications.addAll(Arrays.asList(specifications));
+    }
 
-	@Override
-	public final String toString() {
-		return this.getDescription() + "(" + this.specifications.stream().map(Specification::toString).collect(Collectors.joining(", ")) + ")";
-	}
+    /**
+     * Add.
+     *
+     * @param specification the specification
+     */
+    public final void add(final Specification<E> specification) {
+        this.specifications.add(specification);
+    }
+
+    @Override
+    public final String toString() {
+        return this.getDescription() + "(" + this.specifications.stream().map(Specification::toString).collect(Collectors.joining(", ")) + ")";
+    }
+
+    @Override
+    public final boolean isSatisfiedBy(final E e) {
+        final ArrayList<Boolean> isSatisfiedBy = new ArrayList<>();
+        for (final Specification<E> specification : this.specifications) {
+            isSatisfiedBy.add(specification.isSatisfiedBy(e));
+        }
+        return this.isSatisfiedBy(isSatisfiedBy);
+    }
+
+    /**
+     * Is satisfied by boolean.
+     *
+     * @param isSatisfiedBy the is satisfied by
+     * @return the boolean
+     */
+    protected abstract boolean isSatisfiedBy(final ArrayList<Boolean> isSatisfiedBy);
 }

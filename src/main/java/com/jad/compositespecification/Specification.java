@@ -21,7 +21,7 @@ public interface Specification<E> {
      * @param specification the specification
      * @return the specification
      */
-    Specification<E> or(final Specification<E> specification);
+    Specification<E> or(final Specification<E>... specifications);
 
     /**
      * Xor specification.
@@ -29,7 +29,7 @@ public interface Specification<E> {
      * @param specification the specification
      * @return the specification
      */
-    Specification<E> xor(final Specification<E> specification);
+    Specification<E> xor(final Specification<E>... specifications);
 
     /**
      * And specification.
@@ -37,7 +37,7 @@ public interface Specification<E> {
      * @param specification the specification
      * @return the specification
      */
-    Specification<E> and(final Specification<E> specification);
+    Specification<E> and(final Specification<E>... specification);
 
     /**
      * Not specification.

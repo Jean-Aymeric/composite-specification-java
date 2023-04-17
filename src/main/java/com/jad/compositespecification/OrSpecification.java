@@ -1,24 +1,35 @@
 package com.jad.compositespecification;
 
+import java.util.ArrayList;
+
 /**
  * The type Or specification.
  *
  * @param <E> the type parameter
  */
-class OrSpecification<E> extends BinarySpecification<E> {
+class OrSpecification<E> extends NArySpecification<E> {
 
-	/**
-	 * Instantiates a new Or specification.
-	 *
-	 * @param left  the left specification
-	 * @param right the right specification
-	 */
-	public OrSpecification(final Specification<E> left, final Specification<E> right) {
-		super("||", left, right);
-	}
+    /**
+     * Instantiates a new Or specification.
+     *
+     * @param specifications the specifications
+     */
+    @SafeVarargs
+    public OrSpecification(final Specification<E>... specifications) {
+        super("||", specifications);
+    }
 
-	@Override
-	public final boolean isSatisfiedBy(final E e) {
-		return getLeft().isSatisfiedBy(e) || getRight().isSatisfiedBy(e);
-	}
+    protected OrSpecification(final ArrayList<Specification<E>> specifications) {
+        super("||", specifications);
+    }
+
+    @Override
+    protected boolean isSatisfiedBy(final ArrayList<Boolean> isSatisfiedBy) {
+        for (final boolean b : isSatisfiedBy) {
+            if (b) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

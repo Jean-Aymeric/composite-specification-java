@@ -1,15 +1,15 @@
 package com.jad.compositespecification;
 
 public class RuleContains extends SimpleSpecification<String> {
-    private final String key;
+    private final String token;
 
-    public RuleContains(final String key) {
-        super("contains \"" + key + "\"");
-        this.key = key;
+    public RuleContains(final String token) {
+        super("contains \"" + token + "\"");
+        this.token = token;
     }
 
     @Override
-    public boolean isSatisfiedBy(String candidate) {
-        return candidate.contains(key);
+    public boolean isSatisfiedBy(final String candidate) {
+        return candidate.contains(this.token);
     }
 }

@@ -1,24 +1,34 @@
 package com.jad.compositespecification;
 
+import java.util.ArrayList;
+
 /**
  * The type And specification.
  *
  * @param <E> the type parameter
  */
-class AndSpecification<E> extends BinarySpecification<E> {
+class AndSpecification<E> extends NArySpecification<E> {
+    /**
+     * Instantiates a new And specification.
+     *
+     * @param specifications the specifications
+     */
+    @SafeVarargs
+    public AndSpecification(final Specification<E>... specifications) {
+        super("&&", specifications);
+    }
 
-	/**
-	 * Instantiates a new And specification.
-	 *
-	 * @param left  the left specification
-	 * @param right the right specification
-	 */
-	public AndSpecification(final Specification<E> left, final Specification<E> right) {
-		super("&&", left, right);
-	}
+    protected AndSpecification(final ArrayList<Specification<E>> specifications) {
+        super("&&", specifications);
+    }
 
-	@Override
-	public final boolean isSatisfiedBy(final E e) {
-		return getLeft().isSatisfiedBy(e) && getRight().isSatisfiedBy(e);
-	}
+    @Override
+    protected boolean isSatisfiedBy(final ArrayList<Boolean> isSatisfiedBy) {
+        for (final boolean b : isSatisfiedBy) {
+            if (!b) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

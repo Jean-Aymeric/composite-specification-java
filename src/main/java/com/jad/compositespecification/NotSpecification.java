@@ -16,7 +16,8 @@ class NotSpecification<E> extends UnarySpecification<E> {
         super("!", specification);
     }
 
-    public final boolean isSatisfiedBy(final E e) {
-        return ! getSpecification().isSatisfiedBy(e);
+    @Override
+    public final boolean isSatisfiedBy(final boolean isSatisfiedBy) {
+        return !isSatisfiedBy;
     }
 }

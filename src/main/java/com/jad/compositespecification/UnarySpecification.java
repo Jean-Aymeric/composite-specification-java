@@ -7,29 +7,37 @@ package com.jad.compositespecification;
  */
 public abstract class UnarySpecification<E> extends CompositeSpecification<E> {
 
-    private final Specification<E> specification;
+    /**
+     * The Specification.
+     */
+    protected final Specification<E> specification;
 
     /**
      * Instantiates a new Unary specification.
      *
+     * @param description   the description
      * @param specification the specification
      */
-    public UnarySpecification(final String description, Specification<E> specification) {
+    public UnarySpecification(final String description, final Specification<E> specification) {
         super(description);
         this.specification = specification;
     }
 
-    /**
-     * Gets specification.
-     *
-     * @return the specification
-     */
-    protected final Specification<E> getSpecification() {
-        return specification;
+    @Override
+    public final String toString() {
+        return this.getDescription() + "(" + this.specification.toString() + ")";
     }
 
     @Override
-    public final String toString() {
-        return this.getDescription() + "(" + this.getSpecification().toString() + ")";
+    public final boolean isSatisfiedBy(final E e) {
+        return this.isSatisfiedBy(this.specification.isSatisfiedBy(e));
     }
+
+    /**
+     * Is satisfied by boolean.
+     *
+     * @param isSatisfiedBy the is satisfied by
+     * @return the boolean
+     */
+    protected abstract boolean isSatisfiedBy(boolean isSatisfiedBy);
 }

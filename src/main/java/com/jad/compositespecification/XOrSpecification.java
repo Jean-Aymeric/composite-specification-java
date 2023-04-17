@@ -1,24 +1,39 @@
 package com.jad.compositespecification;
 
+import java.util.ArrayList;
+
 /**
  * The type X or specification.
  *
  * @param <E> the type parameter
  */
-class XOrSpecification<E> extends BinarySpecification<E> {
+class XOrSpecification<E> extends NArySpecification<E> {
 
-	/**
-	 * Instantiates a new X or specification.
-	 *
-	 * @param left  the left
-	 * @param right the right
-	 */
-	public XOrSpecification(final Specification<E> left, final Specification<E> right) {
-		super("^", left, right);
-	}
+    /**
+     * Instantiates a new X or specification.
+     *
+     * @param specifications the specifications
+     */
+    @SafeVarargs
+    public XOrSpecification(final Specification<E>... specifications) {
+        super("^", specifications);
+    }
 
-	@Override
-	public final boolean isSatisfiedBy(final E e) {
-		return getLeft().isSatisfiedBy(e) ^ getRight().isSatisfiedBy(e);
-	}
+    protected XOrSpecification(final ArrayList<Specification<E>> specifications) {
+        super("^", specifications);
+    }
+
+    @Override
+    protected boolean isSatisfiedBy(final ArrayList<Boolean> isSatisfiedBy) {
+        boolean result = false;
+        for (final boolean b : isSatisfiedBy) {
+            if (b) {
+                if (result) {
+                    return false;
+                }
+                result = true;
+            }
+        }
+        return result;
+    }
 }
