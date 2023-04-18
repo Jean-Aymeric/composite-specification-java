@@ -1,20 +1,22 @@
 package com.jad.compositespecification;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
 public class SimpleSpecificationTest {
-    @org.junit.Test
-    public void testToString() {
+    @Test
+    public void testGetDescription() {
         final SimpleSpecification<String> specification = new SimpleSpecification<String>("equals \"candidate\"") {
             @Override
             public boolean isSatisfiedBy(String candidate) {
                 return candidate.equals("candidate");
             }
         };
-        assertEquals("<equals \"candidate\">", specification.toString());
+        assertEquals("<equals \"candidate\">", specification.getDescription());
     }
 
-    @org.junit.Test
+    @Test
     public void testIsSatisfiedBy() {
         final SimpleSpecification<String> specification = new SimpleSpecification<String>("equals \"candidate\"") {
             @Override

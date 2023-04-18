@@ -1,16 +1,18 @@
 package com.jad.compositespecification;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
 public class OrSpecificationTest {
-    @org.junit.Test
-    public void testToString() {
+    @Test
+    public void testGetDescription() {
         final OrSpecification<String> specification = new OrSpecification<>(new RuleContains("candi"),
                 new RuleContains("didate"));
-        assertEquals("||(<contains \"candi\">, <contains \"didate\">)", specification.toString());
+        assertEquals("||(<contains \"candi\">, <contains \"didate\">)", specification.getDescription());
     }
 
-    @org.junit.Test
+    @Test
     public void testIsSatisfiedBy() {
         final OrSpecification<String> specification = new OrSpecification<>(new RuleContains("candi"),
                 new RuleContains("didate"));

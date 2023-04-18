@@ -18,7 +18,7 @@ public interface Specification<E> {
     /**
      * Or specification.
      *
-     * @param specification the specification
+     * @param specifications the specifications
      * @return the specification
      */
     Specification<E> or(final Specification<E>... specifications);
@@ -26,7 +26,7 @@ public interface Specification<E> {
     /**
      * Xor specification.
      *
-     * @param specification the specification
+     * @param specifications the specifications
      * @return the specification
      */
     Specification<E> xor(final Specification<E>... specifications);
@@ -46,4 +46,10 @@ public interface Specification<E> {
      */
     Specification<E> not();
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    String getDescription();
 }

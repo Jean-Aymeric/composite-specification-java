@@ -19,6 +19,11 @@ class XOrSpecification<E> extends NArySpecification<E> {
         super("^", specifications);
     }
 
+    /**
+     * Instantiates a new X or specification.
+     *
+     * @param specifications the specifications
+     */
     protected XOrSpecification(final ArrayList<Specification<E>> specifications) {
         super("^", specifications);
     }

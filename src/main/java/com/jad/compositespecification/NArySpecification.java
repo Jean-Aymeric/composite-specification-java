@@ -25,34 +25,15 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
         this.specifications.addAll(Arrays.asList(specifications));
     }
 
-    protected NArySpecification(final String description, final ArrayList<Specification<E>> specifications) {
-        super(description);
-        this.specifications.addAll(specifications);
-    }
-
     /**
      * Instantiates a new N ary specification.
      *
+     * @param description    the description
      * @param specifications the specifications
      */
-    @SafeVarargs
-    public NArySpecification(final Specification<E>... specifications) {
-        super();
-        this.specifications.addAll(Arrays.asList(specifications));
-    }
-
-    /**
-     * Add.
-     *
-     * @param specification the specification
-     */
-    public final void add(final Specification<E> specification) {
-        this.specifications.add(specification);
-    }
-
-    @Override
-    public final String toString() {
-        return this.getDescription() + "(" + this.specifications.stream().map(Specification::toString).collect(Collectors.joining(", ")) + ")";
+    protected NArySpecification(final String description, final ArrayList<Specification<E>> specifications) {
+        super(description);
+        this.specifications.addAll(specifications);
     }
 
     @Override
@@ -62,6 +43,11 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
             isSatisfiedBy.add(specification.isSatisfiedBy(e));
         }
         return this.isSatisfiedBy(isSatisfiedBy);
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description + "(" + this.specifications.stream().map(Specification::getDescription).collect(Collectors.joining(", ")) + ")";
     }
 
     /**

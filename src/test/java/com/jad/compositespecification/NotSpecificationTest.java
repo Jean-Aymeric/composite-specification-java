@@ -1,15 +1,17 @@
 package com.jad.compositespecification;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
 public class NotSpecificationTest {
-    @org.junit.Test
-    public void testToString() {
+    @Test
+    public void testGetDescription() {
         final NotSpecification<String> specification = new NotSpecification<>(new RuleContains("candi"));
-        assertEquals("!(<contains \"candi\">)", specification.toString());
+        assertEquals("!(<contains \"candi\">)", specification.getDescription());
     }
 
-    @org.junit.Test
+    @Test
     public void testIsSatisfiedBy() {
         final NotSpecification<String> specification = new NotSpecification<>(new RuleContains("candi"));
         assertTrue(specification.isSatisfiedBy("can didate"));

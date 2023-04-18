@@ -24,13 +24,13 @@ public abstract class UnarySpecification<E> extends CompositeSpecification<E> {
     }
 
     @Override
-    public final String toString() {
-        return this.getDescription() + "(" + this.specification.toString() + ")";
+    public final boolean isSatisfiedBy(final E e) {
+        return this.isSatisfiedBy(this.specification.isSatisfiedBy(e));
     }
 
     @Override
-    public final boolean isSatisfiedBy(final E e) {
-        return this.isSatisfiedBy(this.specification.isSatisfiedBy(e));
+    public String getDescription() {
+        return this.description + "(" + this.specification.getDescription() + ")";
     }
 
     /**

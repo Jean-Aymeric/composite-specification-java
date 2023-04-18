@@ -18,6 +18,11 @@ class AndSpecification<E> extends NArySpecification<E> {
         super("&&", specifications);
     }
 
+    /**
+     * Instantiates a new And specification.
+     *
+     * @param specifications the specifications
+     */
     protected AndSpecification(final ArrayList<Specification<E>> specifications) {
         super("&&", specifications);
     }

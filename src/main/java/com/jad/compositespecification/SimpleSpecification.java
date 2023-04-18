@@ -16,7 +16,7 @@ public abstract class SimpleSpecification<E> extends CompositeSpecification<E> {
     }
 
     @Override
-    public final String toString() {
-        return "<" + this.getDescription() + ">";
+    public String getDescription() {
+        return "<" + this.description + ">";
     }
 }

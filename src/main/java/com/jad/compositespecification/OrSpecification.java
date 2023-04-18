@@ -19,6 +19,11 @@ class OrSpecification<E> extends NArySpecification<E> {
         super("||", specifications);
     }
 
+    /**
+     * Instantiates a new Or specification.
+     *
+     * @param specifications the specifications
+     */
     protected OrSpecification(final ArrayList<Specification<E>> specifications) {
         super("||", specifications);
     }

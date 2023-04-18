@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @param <E> the type parameter
  */
 abstract class CompositeSpecification<E> implements Specification<E> {
-    private final String description;
+    protected final String description;
 
     /**
      * Instantiates a new Composite specification.
@@ -18,13 +18,6 @@ abstract class CompositeSpecification<E> implements Specification<E> {
      */
     public CompositeSpecification(final String description) {
         this.description = description;
-    }
-
-    /**
-     * Instantiates a new Composite specification.
-     */
-    public CompositeSpecification() {
-        this.description = this.getClass().getSimpleName();
     }
 
     private ArrayList<Specification<E>> addThisToArray(final Specification<E>[] specification) {
@@ -58,13 +51,4 @@ abstract class CompositeSpecification<E> implements Specification<E> {
 
     @Override
     public abstract boolean isSatisfiedBy(E e);
-
-    /**
-     * Gets description.
-     *
-     * @return the description
-     */
-    protected final String getDescription() {
-        return this.description;
-    }
 }
