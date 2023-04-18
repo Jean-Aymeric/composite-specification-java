@@ -15,7 +15,7 @@ class XOrSpecification<E> extends NArySpecification<E> {
      * @param specifications the specifications
      */
     @SafeVarargs
-    public XOrSpecification(final Specification<E>... specifications) {
+    public XOrSpecification(final ISpecification<E>... specifications) {
         super("^", specifications);
     }
 
@@ -24,7 +24,7 @@ class XOrSpecification<E> extends NArySpecification<E> {
      *
      * @param specifications the specifications
      */
-    protected XOrSpecification(final ArrayList<Specification<E>> specifications) {
+    protected XOrSpecification(final ArrayList<ISpecification<E>> specifications) {
         super("^", specifications);
     }
 

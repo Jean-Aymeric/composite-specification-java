@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
  *
  * @param <E> the type parameter
  */
-public abstract class NArySpecification<E> extends CompositeSpecification<E> {
+abstract class NArySpecification<E> extends AbstractSpecification<E> {
 
-    private final ArrayList<Specification<E>> specifications = new ArrayList<>();
+    private final ArrayList<ISpecification<E>> specifications = new ArrayList<>();
 
     /**
      * Instantiates a new N ary specification.
@@ -20,7 +20,7 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
      * @param specifications the specifications
      */
     @SafeVarargs
-    public NArySpecification(final String description, final Specification<E>... specifications) {
+    public NArySpecification(final String description, final ISpecification<E>... specifications) {
         super(description);
         this.specifications.addAll(Arrays.asList(specifications));
     }
@@ -31,7 +31,7 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
      * @param description    the description
      * @param specifications the specifications
      */
-    protected NArySpecification(final String description, final ArrayList<Specification<E>> specifications) {
+    protected NArySpecification(final String description, final ArrayList<ISpecification<E>> specifications) {
         super(description);
         this.specifications.addAll(specifications);
     }
@@ -39,7 +39,7 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
     @Override
     public final boolean isSatisfiedBy(final E e) {
         final ArrayList<Boolean> isSatisfiedBy = new ArrayList<>();
-        for (final Specification<E> specification : this.specifications) {
+        for (final ISpecification<E> specification : this.specifications) {
             isSatisfiedBy.add(specification.isSatisfiedBy(e));
         }
         return this.isSatisfiedBy(isSatisfiedBy);
@@ -47,7 +47,7 @@ public abstract class NArySpecification<E> extends CompositeSpecification<E> {
 
     @Override
     public String getDescription() {
-        return this.description + "(" + this.specifications.stream().map(Specification::getDescription).collect(Collectors.joining(", ")) + ")";
+        return this.description + "(" + this.specifications.stream().map(ISpecification::getDescription).collect(Collectors.joining(", ")) + ")";
     }
 
     /**

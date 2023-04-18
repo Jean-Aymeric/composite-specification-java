@@ -15,7 +15,7 @@ class OrSpecification<E> extends NArySpecification<E> {
      * @param specifications the specifications
      */
     @SafeVarargs
-    public OrSpecification(final Specification<E>... specifications) {
+    public OrSpecification(final ISpecification<E>... specifications) {
         super("||", specifications);
     }
 
@@ -24,7 +24,7 @@ class OrSpecification<E> extends NArySpecification<E> {
      *
      * @param specifications the specifications
      */
-    protected OrSpecification(final ArrayList<Specification<E>> specifications) {
+    protected OrSpecification(final ArrayList<ISpecification<E>> specifications) {
         super("||", specifications);
     }
 

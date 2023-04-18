@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CompositeSpecificationPackageTest {
+public class SpecificationTest {
     @Test
     public void testIsSatisfiedBy() {
-        Specification<String> specification = new RuleContains("candi").and(new RuleContains("didate"));
+        ISpecification<String> specification = new RuleContains("candi").and(new RuleContains("didate"));
         assertTrue(specification.isSatisfiedBy("candidate"));
         assertFalse(specification.isSatisfiedBy("not candi date"));
         specification = specification.or(new RuleContains("date"));

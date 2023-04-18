@@ -8,7 +8,10 @@ import java.util.Arrays;
  *
  * @param <E> the type parameter
  */
-abstract class CompositeSpecification<E> implements Specification<E> {
+abstract class AbstractSpecification<E> implements ISpecification<E> {
+    /**
+     * The Description.
+     */
     protected final String description;
 
     /**
@@ -16,36 +19,38 @@ abstract class CompositeSpecification<E> implements Specification<E> {
      *
      * @param description the description
      */
-    public CompositeSpecification(final String description) {
+    public AbstractSpecification(final String description) {
         this.description = description;
     }
 
-    private ArrayList<Specification<E>> addThisToArray(final Specification<E>[] specification) {
-        final ArrayList<Specification<E>> list = new ArrayList<>();
+    private ArrayList<ISpecification<E>> addThisToArray(final ISpecification<E>[] specification) {
+        final ArrayList<ISpecification<E>> list = new ArrayList<>();
         list.add(this);
         list.addAll(Arrays.asList(specification));
         return list;
     }
 
+    @SafeVarargs
     @Override
-    public final Specification<E> or(final Specification<E>... specifications) {
+    public final ISpecification<E> or(final ISpecification<E>... specifications) {
         return new OrSpecification<>(this.addThisToArray(specifications));
     }
 
+    @SafeVarargs
     @Override
-    public final Specification<E> xor(final Specification<E>... specifications) {
+    public final ISpecification<E> xor(final ISpecification<E>... specifications) {
         return new XOrSpecification<>(this.addThisToArray(specifications));
     }
 
 
     @SafeVarargs
     @Override
-    public final Specification<E> and(final Specification<E>... specifications) {
+    public final ISpecification<E> and(final ISpecification<E>... specifications) {
         return new AndSpecification<>(this.addThisToArray(specifications));
     }
 
     @Override
-    public final Specification<E> not() {
+    public final ISpecification<E> not() {
         return new NotSpecification<>(this);
     }
 

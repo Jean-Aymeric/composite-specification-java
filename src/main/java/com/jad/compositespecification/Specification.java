@@ -1,55 +1,22 @@
 package com.jad.compositespecification;
 
 /**
- * The interface Specification.
+ * The type Simple specification.
  *
  * @param <E> the type parameter
  */
-public interface Specification<E> {
-
+public abstract class Specification<E> extends AbstractSpecification<E> {
     /**
-     * Is satisfied by boolean.
+     * Instantiates a new Simple specification.
      *
-     * @param e the e
-     * @return the boolean
+     * @param description the description
      */
-    boolean isSatisfiedBy(E e);
+    public Specification(final String description) {
+        super(description);
+    }
 
-    /**
-     * Or specification.
-     *
-     * @param specifications the specifications
-     * @return the specification
-     */
-    Specification<E> or(final Specification<E>... specifications);
-
-    /**
-     * Xor specification.
-     *
-     * @param specifications the specifications
-     * @return the specification
-     */
-    Specification<E> xor(final Specification<E>... specifications);
-
-    /**
-     * And specification.
-     *
-     * @param specification the specification
-     * @return the specification
-     */
-    Specification<E> and(final Specification<E>... specification);
-
-    /**
-     * Not specification.
-     *
-     * @return the specification
-     */
-    Specification<E> not();
-
-    /**
-     * Gets description.
-     *
-     * @return the description
-     */
-    String getDescription();
+    @Override
+    public String getDescription() {
+        return "<" + this.description + ">";
+    }
 }

@@ -12,7 +12,7 @@ class NotSpecification<E> extends UnarySpecification<E> {
      *
      * @param specification the specification
      */
-    public NotSpecification(final Specification<E> specification) {
+    public NotSpecification(final ISpecification<E> specification) {
         super("!", specification);
     }
 

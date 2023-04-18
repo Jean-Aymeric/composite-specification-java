@@ -1,6 +1,6 @@
 package com.jad.compositespecification;
 
-public class RuleContains extends SimpleSpecification<String> {
+public class RuleContains extends Specification<String> {
     private final String token;
 
     public RuleContains(final String token) {

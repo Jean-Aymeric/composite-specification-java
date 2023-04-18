@@ -14,7 +14,7 @@ class AndSpecification<E> extends NArySpecification<E> {
      * @param specifications the specifications
      */
     @SafeVarargs
-    public AndSpecification(final Specification<E>... specifications) {
+    public AndSpecification(final ISpecification<E>... specifications) {
         super("&&", specifications);
     }
 
@@ -23,7 +23,7 @@ class AndSpecification<E> extends NArySpecification<E> {
      *
      * @param specifications the specifications
      */
-    protected AndSpecification(final ArrayList<Specification<E>> specifications) {
+    protected AndSpecification(final ArrayList<ISpecification<E>> specifications) {
         super("&&", specifications);
     }
 

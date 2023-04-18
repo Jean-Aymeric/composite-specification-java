@@ -5,12 +5,12 @@ package com.jad.compositespecification;
  *
  * @param <E> the type parameter
  */
-public abstract class UnarySpecification<E> extends CompositeSpecification<E> {
+abstract class UnarySpecification<E> extends AbstractSpecification<E> {
 
     /**
      * The Specification.
      */
-    protected final Specification<E> specification;
+    protected final ISpecification<E> specification;
 
     /**
      * Instantiates a new Unary specification.
@@ -18,7 +18,7 @@ public abstract class UnarySpecification<E> extends CompositeSpecification<E> {
      * @param description   the description
      * @param specification the specification
      */
-    public UnarySpecification(final String description, final Specification<E> specification) {
+    public UnarySpecification(final String description, final ISpecification<E> specification) {
         super(description);
         this.specification = specification;
     }
